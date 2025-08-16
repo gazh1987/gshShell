@@ -11,8 +11,11 @@ public class Main {
     	
         while (true) {
         	System.out.print("$ ");
-        	String input = scanner.nextLine();
-        	String[] parsed = input.split(" ");
+        	String input = scanner.nextLine().trim();
+        	if (input.isEmpty()) {
+        		continue;
+        	}
+        	String[] parsed = input.split("\\s+");  // matches and splits on one or more consecutive whitespace characters
         	
         	switch (parsed[0]) {
         		case "exit":
@@ -20,8 +23,10 @@ public class Main {
         		case "echo":
         			System.out.println(String.join(" ", Arrays.copyOfRange(parsed, 1, parsed.length)));
         			break;
+        		case "type":
+        			// Todo
         		default:
-        			System.out.println(input + ": command not found");
+        			System.out.println(parsed[0] + ": command not found");
         	}
         }
 	}
